@@ -1129,11 +1129,11 @@ a.tzk-cal__d:hover { background: var(--tzk-hover); color: var(--tzk-red); }
 .tzk-strip__day.is-today small { color: rgba(255, 255, 255, .8); }
 .tzk-strip__day.is-sel { border-color: var(--tzk-red); box-shadow: inset 0 0 0 1px var(--tzk-red); }
 .tzk-strip__btn {
-  flex: 0 0 66px; height: 64px; margin-right: 4px; border-radius: 10px; border: 1.5px solid var(--tzk-red);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  color: var(--tzk-red);
+  flex: 0 0 44px; height: 64px; margin-right: 2px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; color: var(--tzk-red);
+  transition: background-color .15s;
 }
-.tzk-strip__btn span { font-size: 17px; line-height: 1; font-weight: 700; }
+.tzk-strip__btn:hover, .tzk-strip__btn:active { background: var(--tzk-hover); }
 
 /* ── Шторка снизу (мобильная) ── */
 .tzk-sheet { position: fixed; inset: 0; z-index: 2147483000; }
@@ -1200,7 +1200,12 @@ a.tzk-cal__d:hover { background: var(--tzk-hover); color: var(--tzk-red); }
   var ICON_L = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>';
   var ICON_R = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>';
   var ICON_CARET = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>';
-  var ICON_CAL = '<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="4" width="15" height="13.5" rx="2"/><path d="M6.5 2v4M13.5 2v4M2.5 8.5h15"/></svg>';
+  var ICON_CAL = '<svg width="30" height="30" viewBox="0 0 28 28" fill="none" aria-hidden="true">' +
+    '<rect x="3.5" y="5" width="21" height="19.5" rx="4.5" stroke="currentColor" stroke-width="1.7"/>' +
+    '<path d="M3.5 10.5h21M9.5 3v4M18.5 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
+    '<g fill="currentColor" opacity=".5"><circle cx="9" cy="15" r="1.15"/><circle cx="14" cy="15" r="1.15"/><circle cx="19" cy="15" r="1.15"/>' +
+    '<circle cx="9" cy="19.5" r="1.15"/><circle cx="14" cy="19.5" r="1.15"/></g>' +
+    '<rect x="17" y="17.5" width="4" height="4" rx="1.2" fill="currentColor"/></svg>';
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function ymd(d) { return '' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()); }
@@ -1337,7 +1342,7 @@ a.tzk-cal__d:hover { background: var(--tzk-hover); color: var(--tzk-red); }
   /* ── Полоса 7 дней ── */
   function Strip(el, o) {
     var h = ['<div class="tzk-strip__cap">Лента по дням</div><div class="tzk-strip__row">',
-      '<button type="button" class="tzk-strip__btn" aria-haspopup="dialog" aria-label="Выбрать другую дату">' + ICON_CAL + '<span>дата</span></button>'];
+      '<button type="button" class="tzk-strip__btn" aria-haspopup="dialog" aria-label="Выбрать другую дату" title="Выбрать дату">' + ICON_CAL + '</button>'];
     for (var k = 6; k >= 0; k--) {
       var d = new Date(o.today.getFullYear(), o.today.getMonth(), o.today.getDate() - k);
       if (d < o.min) continue;
